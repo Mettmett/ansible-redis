@@ -2,7 +2,7 @@
 
 == Goals
 
-Little Ansible role to install Redis from official repos, with a custom (and simple) configuration.
+Little Ansible role to install Traefik from official GitHub repository, with a simple configuration.
 
 == What remains to be done ?
 
@@ -13,7 +13,7 @@ Little Ansible role to install Redis from official repos, with a custom (and sim
 
 == Vars
 
-One variable is used in the file `main.yml`. Change the value of `redis_auth_pass`, don't forget to use it in your configurations files.
+Some variables are used in the file `main.yml`. Change the value of `traefik_version` and `traefik_log_file`, don't forget to use it in your configurations files.
 
 == How to use it ?
 
