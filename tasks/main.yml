@@ -1,0 +1,48 @@
+---
+# tasks/main.yml
+
+- name: Install redis-server and tools from distribution repos
+  hosts: all
+  become: true
+  vars:
+    redis_auth_pass: "totolasticot"
+
+  tasks:
+    - name: (sys) update host apt cache
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: (sys) install redis-server and tools
+      apt:
+        name: "{{ item }}"
+        state: present
+        install_recommends: false
+      loop:
+        - redis-server
+
+    - name: (sys) enable memory overcommit
+      sysctl:
+        name: vm.overcommit_memory
+        value: "1"
+        reload: true
+
+    - name: (sys) installing our redis configuration
+      template:
+        src: "templates/redis.conf.j2"
+        dest: "/etc/redis/redis.conf"
+        owner: "redis"
+        group: "redis"
+        mode: u+rw,g-wx,o-wx
+
+    - name: (sys) enable redis-server
+      systemd:
+        name: "redis"
+        enabled: true
+        masked: false
+
+    - name: (sys) start redis to the moon
+      systemd:
+        name: "redis"
+        state: restarted
+        daemon_reload: true
