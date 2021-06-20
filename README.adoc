@@ -8,7 +8,6 @@ Little Ansible role to install Redis from official repos, with a custom (and sim
 
 - use handlers
 - create ansible tags
-- create a verify test/molecule
 - add your value!
 
 == Vars

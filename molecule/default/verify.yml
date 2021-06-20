@@ -2,4 +2,18 @@
 
 - name: Verify
   hosts: all
-# TODO
+  become: true
+  tasks:
+  - name: (check) Test if services are started and enabled
+    systemd:
+      name: "{{ item }}"
+      state: started
+      enabled: true
+    loop:
+      - redis-server.service
+
+  - name: (check) Test if services ports are open and reachable
+    shell: "ss -ntlp | grep {{ item }}"
+    loop:
+      - 6379
+    changed_when: false
