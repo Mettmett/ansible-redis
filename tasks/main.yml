@@ -26,15 +26,4 @@
     owner: "redis"
     group: "redis"
     mode: u+rw,g-wx,o-wx
-
-- name: (sys) enable redis-server
-  systemd:
-    name: "redis"
-    enabled: true
-    masked: false
-
-- name: (sys) start redis to the moon
-  systemd:
-    name: "redis"
-    state: restarted
-    daemon_reload: true
+  notify: start redis
