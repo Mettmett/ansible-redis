@@ -1,3 +1,7 @@
 ---
 
 redis_auth_pass: "totolasticot"
+redis_maxclients: "8600"
+# maxmemory in bytes, required by redis
+redis_maxmemory: "134217728"
+redis_maxmemory_policy: "allkeys-lru"
