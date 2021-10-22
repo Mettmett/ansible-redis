@@ -12,7 +12,12 @@ Little Ansible role to install Redis from official repos, with a custom (and sim
 
 == Vars
 
-One variable is used in the file `main.yml`. Change the value of `redis_auth_pass`, don't forget to use it in your configurations files.
+One variable is used in the file `main.yml`. 
+
+- `redis_auth_pass` : needed to secure (a little) the connexion
+- `redis_maxclients` : default to 8600
+- `redis_maxmemory` : "134217728" maxmemory in bytes, required by redis
+- `redis_maxmemory_policy` : "allkeys-lru" default
 
 == How to use it ?
 
@@ -20,34 +25,35 @@ One variable is used in the file `main.yml`. Change the value of `redis_auth_pas
 
 Simple ! Use the venv.sh script to enter to the matrix (c).
 
-```bash
+[source, bash]
+----
 source venv.sh
-```
+----
 
 This virtualenv will bring you needed tools. You will in the virtualenv automatically. You are now ready to create virtual machines.
 
-```bash
+[source, bash]
+----
 molecule create
-```
+----
 
 And then use the playbook
 
-```bash
+[source, bash]
+----
 molecule converge
-```
+----
 
 When you're all set, destroy it.
 
-```bash
+[source, bash]
+----
 molecule destroy
-```
+----
 
-=== Use this role in another ansible playbook
+To test it all, just do :
 
-*NEED FIX*
-
-Incorpore this role on your playbook and go !
-
-```bash
-
-```
+[source, bash]
+----
+molecule test
+----
