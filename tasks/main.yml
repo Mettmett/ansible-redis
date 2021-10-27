@@ -1,29 +1,29 @@
 ---
-# tasks/main.yml
+
 - name: (sys) update host apt cache
   apt:
-    update_cache: true
     cache_valid_time: 3600
+    update_cache: true
 
 - name: (sys) install redis-server and tools
   apt:
+    install_recommends: false
     name: "redis-server"
     state: present
-    install_recommends: false
 
 - name: (sys) enable memory overcommit
   sysctl:
     name: vm.overcommit_memory
-    value: "1"
     reload: true
+    value: "1"
 
 - name: (sys) installing our redis configuration
   template:
-    src: "templates/redis.conf.j2"
     dest: "/etc/redis/redis.conf"
-    owner: "redis"
     group: "redis"
     mode: u+rw,g-wx,o-wx
+    owner: "redis"
+    src: "templates/redis.conf.j2"
 
 - name: (sys) start redis
   systemd:
