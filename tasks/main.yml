@@ -7,11 +7,9 @@
 
 - name: (sys) install redis-server and tools
   apt:
-    name: "{{ item }}"
+    name: "redis-server"
     state: present
     install_recommends: false
-  loop:
-    - redis-server
 
 - name: (sys) enable memory overcommit
   sysctl:
