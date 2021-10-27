@@ -4,12 +4,6 @@
 
 Little Ansible role to install Redis from official repos, with a custom (and simple) configuration.
 
-== What remains to be done ?
-
-- use handlers
-- create ansible tags
-- add your value!
-
 == Vars
 
 One variable is used in the file `main.yml`. 
@@ -30,18 +24,11 @@ Simple ! Use the venv.sh script to enter to the matrix (c).
 source venv.sh
 ----
 
-This virtualenv will bring you needed tools. You will in the virtualenv automatically. You are now ready to create virtual machines.
+This virtualenv will bring you needed tools. You will in the virtualenv automatically. You are now ready to create virtual machines and use the playbook.
 
 [source, bash]
 ----
-molecule create
-----
-
-And then use the playbook
-
-[source, bash]
-----
-molecule converge
+molecule create && molecule converge
 ----
 
 When you're all set, destroy it.
@@ -56,4 +43,15 @@ To test it all, just do :
 [source, bash]
 ----
 molecule test
+----
+
+=== Use this role in another ansible playbook
+
+Incorpore this role on your playbook, in the file `requirements.yml` and go !
+
+[source, bash]
+----
+roles:
+  - src: git@github.com:Mettmett/ansible-redis.git
+    scm: git
 ----
