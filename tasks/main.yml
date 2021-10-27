@@ -26,4 +26,11 @@
     owner: "redis"
     group: "redis"
     mode: u+rw,g-wx,o-wx
-  notify: restart redis
+
+- name: (sys) start redis
+  systemd:
+    daemon_reload: true
+    enabled: true
+    masked: false
+    name: "redis"
+    state: started
